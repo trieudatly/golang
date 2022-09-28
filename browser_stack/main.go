@@ -2,62 +2,63 @@ package main
 
 import "fmt"
 
+//khai báo 1 struct gồm 1 mảng kiểu string và 1 biến count kiểu int
 type Stack struct {
-	data []interface{}
-	top  int
+	data  []string //mảng chứa các phần tử của stack
+	count int      //biến đếm số lượng phần tử trong stack
 }
 
-func (s *Stack) Push(element interface{}) {
-	s.top++
+//tăng count 1 đơn vị và nối 1 phần tử vào đuôi của mảng
+func (s *Stack) Push(element string) {
+	s.count++
 	s.data = append(s.data, element)
 }
 
-func (s *Stack) Pop() interface{} {
+//
+func (s *Stack) Pop() string {
 	if len(s.data) > 0 {
-		s.top--
-		last := s.data[s.top]
-		s.data = s.data[:s.top]
-
+		s.count--                 //count giảm 1 đơn vị
+		last := s.data[s.count]   //tạo 1 biến last lấy giá trị tại index thứ count của mảng đưa vào biến last
+		s.data = s.data[:s.count] //gán mảng thành 1 slice có giá trị từ đầu mảng đến index count
 		return last
 	}
 
-	return nil
+	return "No data"
 }
 
-func (s *Stack) Peek() interface{} {
+func (s *Stack) Peek() string {
 	if len(s.data) > 0 {
-		return s.data[s.top-1]
+		return s.data[s.count-1]
 	}
-
-	return nil
+	return "No data"
 }
 
 func (s *Stack) Clear() {
-	s.top = 0
-	s.data = []interface{}{}
+	s.count = 0
+	s.data = nil
 }
 
 func (s *Stack) Length() int {
-	return s.top
+	return s.count
 }
 
 var history Stack
 var future Stack
 
-func visit(url string) {
+func Visit(url string) {
 	history.Push(url)
 	future.Clear()
 }
-func show(S Stack) {
-	if S.Length() == 0 {
+func Show(s Stack) {
+	if s.Length() == 0 {
 		fmt.Println("\nNo data")
 	} else {
-		for _, element := range S.data {
-			fmt.Print(fmt.Sprint(element) + " | ")
+		for _, element := range s.data {
+			fmt.Print(" | " + element + " | ")
 		}
 	}
 }
-func back() string {
+func Back() string {
 	if history.Length() > 1 {
 		future.Push(history.Pop())
 		return fmt.Sprint(history.Peek())
@@ -65,7 +66,7 @@ func back() string {
 		return "No data"
 	}
 }
-func forward() string {
+func Forward() string {
 	if future.Length() >= 1 {
 		history.Push(future.Pop())
 		return fmt.Sprint(history.Peek())
@@ -73,7 +74,8 @@ func forward() string {
 		return "No data"
 	}
 }
-func currentPage() {
+
+func CurrentPage() {
 	if history.Length() == 0 {
 		fmt.Println("\nNo data")
 	} else {
@@ -94,18 +96,18 @@ func main() {
 			fmt.Print("\nEnter address:")
 			var name string
 			fmt.Scanln(&name)
-			visit(name)
-			currentPage()
+			Visit(name)
+			CurrentPage()
 		case 2:
-			fmt.Println("\n" + back() + "\n")
+			fmt.Println("\n" + Back() + "\n")
 		case 3:
-			fmt.Println("\n" + forward() + "\n")
+			fmt.Println("\n" + Forward() + "\n")
 		case 4:
-			show(history)
+			Show(history)
 		case 5:
-			show(future)
+			Show(future)
 		case 6:
-			currentPage()
+			CurrentPage()
 		case 7:
 
 		}
