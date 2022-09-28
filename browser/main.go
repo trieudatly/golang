@@ -4,8 +4,6 @@ import (
 	"fmt"
 
 	lls "github.com/emirpasic/gods/stacks/linkedliststack"
-
-	
 )
 
 var history lls.Stack = *lls.New()
@@ -59,7 +57,7 @@ func main() {
 
 	for ok := true; ok; ok = choice != 7 {
 		fmt.Print("\n1.Visit new page\n2.Go back\n3.Go forward\n4.Show history\n5.Show future\n6.Current page\n7.Exit")
-		fmt.Print("\nYour choice:")
+		fmt.Print("\nYour choice :")
 		fmt.Scanln(&choice)
 		switch choice {
 		case 1:
