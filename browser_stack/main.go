@@ -61,7 +61,7 @@ func Show(s Stack) {
 func Back() string {
 	if history.Length() > 1 {
 		future.Push(history.Pop())
-		return fmt.Sprint(history.Peek())
+		return history.Peek()
 	} else {
 		return "No data"
 	}
@@ -69,7 +69,7 @@ func Back() string {
 func Forward() string {
 	if future.Length() >= 1 {
 		history.Push(future.Pop())
-		return fmt.Sprint(history.Peek())
+		return history.Peek()
 	} else {
 		return "No data"
 	}
