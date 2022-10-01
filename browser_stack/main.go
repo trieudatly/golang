@@ -75,12 +75,11 @@ func Forward() string {
 	}
 }
 
-func CurrentPage() {
+func CurrentPage() string {
 	if history.Length() == 0 {
-		fmt.Println("\nNo data")
+		return "No data"
 	} else {
-		fmt.Println("\n")
-		fmt.Println(history.Peek())
+		return history.Peek()
 	}
 }
 
@@ -107,7 +106,7 @@ func main() {
 		case 5:
 			Show(future)
 		case 6:
-			CurrentPage()
+			fmt.Println(CurrentPage())
 		case 7:
 
 		}
