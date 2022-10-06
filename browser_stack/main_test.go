@@ -12,7 +12,7 @@ func TestCurrentPageTableDriven(t *testing.T) {
 	}{
 		{"facebook.com", "facebook.com"},
 		{"tuoitre.com", "tuoitre.com"},
-		{"thanhnien.com", "trungnien.com"},
+		{"thanhnien.com", "thanhnien.com"},
 	}
 
 	for _, tt := range tests {

@@ -49,14 +49,17 @@ func Visit(url string) {
 	history.Push(url)
 	future.Clear()
 }
-func Show(s Stack) {
+func Show(s Stack) string {
 	if s.Length() == 0 {
-		fmt.Println("\nNo data")
+		return "No data"
 	} else {
+		show := ""
 		for _, element := range s.data {
-			fmt.Print(" | " + element + " | ")
+			show = show + "|" + element + "|"
 		}
+		return show
 	}
+
 }
 func Back() string {
 	if history.Length() > 1 {
@@ -96,15 +99,15 @@ func main() {
 			var name string
 			fmt.Scanln(&name)
 			Visit(name)
-			CurrentPage()
+			fmt.Println(CurrentPage())
 		case 2:
 			fmt.Println("\n" + Back() + "\n")
 		case 3:
 			fmt.Println("\n" + Forward() + "\n")
 		case 4:
-			Show(history)
+			fmt.Println(Show(history))
 		case 5:
-			Show(future)
+			fmt.Println(Show(future))
 		case 6:
 			fmt.Println(CurrentPage())
 		case 7:
