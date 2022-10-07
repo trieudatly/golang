@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"testing"
 )
-
+var testStack Stack
 func TestPushTableDriven(t *testing.T) {
 	var tests = []struct {
-		url  string
+		input  string
 		want int
 	}{
 		{"facebook.com", 1},
@@ -17,10 +17,10 @@ func TestPushTableDriven(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		testname := fmt.Sprintf("%v", tt.url)
+		testname := fmt.Sprintf("%v", tt.input)
 		t.Run(testname, func(t *testing.T) {
-			history.Push(tt.url)
-			ans := history.Length()
+			testStack.Push(tt.input)
+			ans := testStack.Length()
 			if ans != tt.want {
 				t.Errorf("got %d, want %d", ans, tt.want)
 			}
@@ -29,13 +29,13 @@ func TestPushTableDriven(t *testing.T) {
 }
 
 func TestPeek(t *testing.T) {
-	ans := history.Peek()
+	ans := testStack.Peek()
 	if ans != "thanhnien.com" {
 		t.Error("", ans)
 	}
 }
 func TestLenght(t *testing.T) {
-	ans := history.Length()
+	ans := testStack.Length()
 	if ans != 3 {
 		t.Error("", ans)
 	}
@@ -53,8 +53,8 @@ func TestPopTableDriven(t *testing.T) {
 	for _, tt := range tests {
 		testname := fmt.Sprintf("%v", tt.wantUrl)
 		t.Run(testname, func(t *testing.T) {
-			pop := history.Pop()
-			lenght := history.Length()
+			pop := testStack.Pop()
+			lenght := testStack.Length()
 			ans := pop + strconv.Itoa(lenght)
 			want := tt.wantUrl + tt.wantLength
 			if ans != want {
